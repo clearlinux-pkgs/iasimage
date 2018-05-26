@@ -6,7 +6,7 @@
 #
 Name     : iasimage
 Version  : v0.0.1
-Release  : 1
+Release  : 2
 URL      : https://github.com/intel/iasimage/releases/download/v0.0.1/iasimage-v0.0.1.tar.gz
 Source0  : https://github.com/intel/iasimage/releases/download/v0.0.1/iasimage-v0.0.1.tar.gz
 Source99 : https://github.com/intel/iasimage/releases/download/v0.0.1/iasimage-v0.0.1.tar.gz.asc
@@ -37,11 +37,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1527293840
+export SOURCE_DATE_EPOCH=1527295209
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1527293840
+export SOURCE_DATE_EPOCH=1527295209
 rm -rf %{buildroot}
 %make_install
 
