@@ -6,7 +6,7 @@
 #
 Name     : iasimage
 Version  : v0.0.2
-Release  : 3
+Release  : 4
 URL      : https://github.com/intel/iasimage/releases/download/v0.0.2/iasimage-v0.0.2.tar.gz
 Source0  : https://github.com/intel/iasimage/releases/download/v0.0.2/iasimage-v0.0.2.tar.gz
 Source99 : https://github.com/intel/iasimage/releases/download/v0.0.2/iasimage-v0.0.2.tar.gz.asc
