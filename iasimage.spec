@@ -5,44 +5,67 @@
 # Source0 file verified with key 0xC9D50845DE5519CB (arzhan@kinzhalin.com)
 #
 Name     : iasimage
-Version  : v0.0.2
-Release  : 4
+Version  : 0.0.2
+Release  : 5
 URL      : https://github.com/intel/iasimage/releases/download/v0.0.2/iasimage-v0.0.2.tar.gz
 Source0  : https://github.com/intel/iasimage/releases/download/v0.0.2/iasimage-v0.0.2.tar.gz
-Source99 : https://github.com/intel/iasimage/releases/download/v0.0.2/iasimage-v0.0.2.tar.gz.asc
+Source1  : https://github.com/intel/iasimage/releases/download/v0.0.2/iasimage-v0.0.2.tar.gz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
-Requires: iasimage-bin
+Requires: iasimage-bin = %{version}-%{release}
+Requires: iasimage-license = %{version}-%{release}
 Requires: cryptography
+BuildRequires : cryptography
 
 %description
 iasimage
 -----------
-iasimage is a utility program for creating Intel Automotive Service (IAS) images, a binary file format understood by IntelÂ© Slim Bootloader to load and initialize Operating Systems or Hypervisor.
+iasimage is a utility program for creating Intel Automotive Service (IAS) images, a binary file format understood by Intel© Slim Bootloader to load and initialize Operating Systems or Hypervisor.
 
 %package bin
 Summary: bin components for the iasimage package.
 Group: Binaries
+Requires: iasimage-license = %{version}-%{release}
 
 %description bin
 bin components for the iasimage package.
 
 
+%package license
+Summary: license components for the iasimage package.
+Group: Default
+
+%description license
+license components for the iasimage package.
+
+
 %prep
 %setup -q -n iasimage-0.0.2
+cd %{_builddir}/iasimage-0.0.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1527862878
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604095446
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 make  %{?_smp_mflags}
 
+
 %install
-export SOURCE_DATE_EPOCH=1527862878
+export SOURCE_DATE_EPOCH=1604095446
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/iasimage
+cp %{_builddir}/iasimage-0.0.2/LICENSE %{buildroot}/usr/share/package-licenses/iasimage/8f4b682b48362f59d962860261f77a6da5b61282
 %make_install
 
 %files
@@ -51,3 +74,7 @@ rm -rf %{buildroot}
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/iasimage
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/iasimage/8f4b682b48362f59d962860261f77a6da5b61282
