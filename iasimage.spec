@@ -6,7 +6,7 @@
 #
 Name     : iasimage
 Version  : 0.0.2
-Release  : 5
+Release  : 6
 URL      : https://github.com/intel/iasimage/releases/download/v0.0.2/iasimage-v0.0.2.tar.gz
 Source0  : https://github.com/intel/iasimage/releases/download/v0.0.2/iasimage-v0.0.2.tar.gz
 Source1  : https://github.com/intel/iasimage/releases/download/v0.0.2/iasimage-v0.0.2.tar.gz.asc
@@ -15,8 +15,7 @@ Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: iasimage-bin = %{version}-%{release}
 Requires: iasimage-license = %{version}-%{release}
-Requires: cryptography
-BuildRequires : cryptography
+Requires: pypi(cryptography)
 
 %description
 iasimage
@@ -49,20 +48,20 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604095446
+export SOURCE_DATE_EPOCH=1641680276
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1604095446
+export SOURCE_DATE_EPOCH=1641680276
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/iasimage
 cp %{_builddir}/iasimage-0.0.2/LICENSE %{buildroot}/usr/share/package-licenses/iasimage/8f4b682b48362f59d962860261f77a6da5b61282
